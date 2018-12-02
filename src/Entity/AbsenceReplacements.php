@@ -18,13 +18,13 @@ class AbsenceReplacements
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\Employee" inversedBy="absenceReplacements")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="absenceReplacements")
      */
     private $replacement;
 
     /**
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\Absence" inversedBy="absenceReplacements")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Absence", inversedBy="absenceReplacements")
      */
     private $absence;
 
