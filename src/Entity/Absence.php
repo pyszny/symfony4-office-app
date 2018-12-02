@@ -18,8 +18,9 @@ class Absence
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="absences")
      */
-    private $employee_id;
+    private $employee;
 
     /**
      * @ORM\Column(type="date")
@@ -43,27 +44,28 @@ class Absence
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\Status")
      */
-    private $status_id;
+    private $status;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $type_id;
+    private $type;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmployeeId(): ?int
+    public function getEmployee(): ?int
     {
-        return $this->employee_id;
+        return $this->employee;
     }
 
-    public function setEmployeeId(int $employee_id): self
+    public function setEmployee(int $employee): self
     {
-        $this->employee_id = $employee_id;
+        $this->employee = $employee;
 
         return $this;
     }
@@ -116,26 +118,26 @@ class Absence
         return $this;
     }
 
-    public function getStatusId(): ?int
+    public function getStatus(): ?int
     {
-        return $this->status_id;
+        return $this->status;
     }
 
-    public function setStatusId(int $status_id): self
+    public function setStatus(int $status): self
     {
-        $this->status_id = $status_id;
+        $this->status = $status;
 
         return $this;
     }
 
-    public function getTypeId(): ?int
+    public function getType(): ?int
     {
-        return $this->type_id;
+        return $this->type;
     }
 
-    public function setTypeId(int $type_id): self
+    public function setType(int $type): self
     {
-        $this->type_id = $type_id;
+        $this->type = $type;
 
         return $this;
     }

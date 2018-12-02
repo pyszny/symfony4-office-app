@@ -17,16 +17,16 @@ class AbsenceReplacements
     private $id;
 
     /**
-     * todo connect to employee
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee" inversedBy="absenceReplacements")
      */
-    private $replacement_id;
+    private $replacement;
 
     /**
-     * todo connect to absence
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Absence" inversedBy="absenceReplacements")
      */
-    private $absence_id;
+    private $absence;
 
     /**
      * @ORM\Column(type="datetime")
@@ -44,36 +44,36 @@ class AbsenceReplacements
     private $comment;
 
     /**
-     * todo connect to status
      * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\Status")
      */
-    private $status_id;
+    private $status;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getReplacementId(): ?int
+    public function getReplacement(): ?int
     {
-        return $this->replacement_id;
+        return $this->replacement;
     }
 
-    public function setReplacementId(int $replacement_id): self
+    public function setReplacement(int $replacement): self
     {
-        $this->replacement_id = $replacement_id;
+        $this->replacement = $replacement;
 
         return $this;
     }
 
-    public function getAbsenceId(): ?int
+    public function getAbsence(): ?int
     {
-        return $this->absence_id;
+        return $this->absence;
     }
 
-    public function setAbsenceId(int $absence_id): self
+    public function setAbsence(int $absence): self
     {
-        $this->absence_id = $absence_id;
+        $this->absence = $absence;
 
         return $this;
     }
@@ -114,14 +114,14 @@ class AbsenceReplacements
         return $this;
     }
 
-    public function getStatusId(): ?int
+    public function getStatus(): ?int
     {
-        return $this->status_id;
+        return $this->status;
     }
 
-    public function setStatusId(int $status_id): self
+    public function setStatus(int $status): self
     {
-        $this->status_id = $status_id;
+        $this->status = $status;
 
         return $this;
     }
