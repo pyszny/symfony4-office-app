@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EmployeeRepository")
@@ -37,9 +39,25 @@ class Employee
     private $updated_at;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AbsenceApprovers", mappedBy="approver")
+     */
+    private $absenceApprovers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AbsenceReplacements", mappedBy="replacement")
+     */
+    private $absenceReplacements;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $email;
+
+    public function __construct()
+    {
+        $this->absenceApprovers = new ArrayCollection();
+        $this->absenceReplacements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,5 +122,21 @@ class Employee
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|AbsenceApprovers[]
+     */
+    public function getAbsenceApprovers(): Collection
+    {
+        return $this->absenceApprovers;
+    }
+
+    /**
+     * @return Collection|AbsenceReplacements[]
+     */
+    public function getAbsenceReplacements(): Collection
+    {
+        return $this->absenceReplacements;
     }
 }

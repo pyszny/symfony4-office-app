@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AbsenceRepository")
@@ -52,6 +54,22 @@ class Absence
      * @ORM\Column(type="integer")
      */
     private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AbsenceApprovers", mappedBy="approver")
+     */
+    private $absenceApprovers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\AbsenceReplacements", mappedBy="replacement")
+     */
+    private $absenceReplacements;
+
+    public function __construct()
+    {
+        $this->absenceApprovers = new ArrayCollection();
+        $this->absenceReplacements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -140,5 +158,21 @@ class Absence
         $this->type = $type;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|AbsenceApprovers[]
+     */
+    public function getAbsenceApprovers(): Collection
+    {
+        return $this->absenceApprovers;
+    }
+
+    /**
+     * @return Collection|AbsenceReplacements[]
+     */
+    public function getAbsenceReplacements(): Collection
+    {
+        return $this->absenceReplacements;
     }
 }
