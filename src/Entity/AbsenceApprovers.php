@@ -18,8 +18,9 @@ class AbsenceApprovers
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Absence", inversedBy="absenceApprovers")
      */
-    private $absence_id;
+    private $absence;
 
     /**
      * @ORM\Column(type="datetime")
@@ -33,13 +34,15 @@ class AbsenceApprovers
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="absenceApprovers")
      */
-    private $approver_id;
+    private $approver;
 
     /**
      * @ORM\Column(type="integer")
+     * @ORM\OneToOne(targetEntity="App\Entity\Status")
      */
-    private $status_id;
+    private $status;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -51,14 +54,14 @@ class AbsenceApprovers
         return $this->id;
     }
 
-    public function getAbsenceId(): ?int
+    public function getAbsence(): ?int
     {
-        return $this->absence_id;
+        return $this->absence;
     }
 
-    public function setAbsenceId(int $absence_id): self
+    public function setAbsenceId(int $absence): self
     {
-        $this->absence_id = $absence_id;
+        $this->absence = $absence;
 
         return $this;
     }
@@ -87,26 +90,26 @@ class AbsenceApprovers
         return $this;
     }
 
-    public function getApproverId(): ?int
+    public function getApprover(): ?int
     {
-        return $this->approver_id;
+        return $this->approver;
     }
 
-    public function setApproverId(int $approver_id): self
+    public function setApprover(int $approver): self
     {
-        $this->approver_id = $approver_id;
+        $this->approver = $approver;
 
         return $this;
     }
 
-    public function getStatusId(): ?int
+    public function getStatus(): ?int
     {
-        return $this->status_id;
+        return $this->status;
     }
 
-    public function setStatusId(int $status_id): self
+    public function setStatus(int $status): self
     {
-        $this->status_id = $status_id;
+        $this->status = $status;
 
         return $this;
     }
