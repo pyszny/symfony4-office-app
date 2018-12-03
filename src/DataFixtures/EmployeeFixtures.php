@@ -8,11 +8,9 @@
 
 namespace App\DataFixtures;
 
-
 use App\Entity\Employee;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Validator\Constraints\Date;
 
 class EmployeeFixtures extends Fixture
 {
