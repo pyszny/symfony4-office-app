@@ -10,7 +10,9 @@ namespace App\Controller;
 
 
 use App\Entity\Employee;
+use App\Repository\EmployeeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class EmployeeController extends AbstractController
@@ -18,14 +20,8 @@ class EmployeeController extends AbstractController
     /**
      * @Route("/Employee", name="employee")
      */
-    public function index()
+    public function index(EmployeeRepository $employeeRepository): Response
     {
-        $employees = $this->getDoctrine()
-            ->getRepository(Employee::class)
-            ->findAll();
-
-        return $this->render('employee/index.html.twig', [
-            'employees' => $employees,
-        ]);
+        return $this->render('employee/index.html.twig', ['employees' => $employeeRepository->findAll()]);
     }
 }
