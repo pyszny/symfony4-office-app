@@ -39,6 +39,11 @@ class Employee
     private $updated_at;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Absence", mappedBy="employee")
+     */
+    private $absences;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\AbsenceApprovers", mappedBy="approver")
      */
     private $absenceApprovers;
@@ -121,6 +126,24 @@ class Employee
     {
         $this->email = $email;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAbsences()
+    {
+        return $this->absences;
+    }
+
+    /**
+     * @param mixed $absences
+     * @return Employee
+     */
+    public function setAbsences($absences)
+    {
+        $this->absences = $absences;
         return $this;
     }
 
