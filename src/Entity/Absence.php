@@ -19,7 +19,6 @@ class Absence
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="App\Entity\Employee", inversedBy="absences")
      */
     private $employee;

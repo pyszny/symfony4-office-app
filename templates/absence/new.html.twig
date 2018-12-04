@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} New Absence {% endblock %}
+
+{% block body %}
+
+    <h1>Create new Absence</h1>
+
+    {{ include('absence/_form.html.twig') }}
+
+    <a href="{{ path('absences') }}">Back to list</a>
+
+{% endblock %}

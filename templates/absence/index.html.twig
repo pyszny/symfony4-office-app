@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Absence index{% endblock %}
+
+{% block body %}
+
+    {% for absence in absences %}
+        <tr>
+            <td>{{ absence.id }}</td>
+            <td>{{ absence.start_date }}</td>
+            <td>{{ absence.end_date }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td>no records found</td>
+        </tr>
+    {% endfor %}
+
+    <a href="{{ path('absence_new') }}">Create new</a>
+
+{% endblock %}
