@@ -7,8 +7,11 @@
     {% for absence in absences %}
         <tr>
             <td>{{ absence.id }}</td>
-            <td>{{ absence.start_date }}</td>
-            <td>{{ absence.end_date }}</td>
+            <br>
+            <td>{{ absence.startdate|date("m/d/Y") }}</td>
+            <br>
+            <td>{{ absence.enddate|date("m/d/Y") }}</td>
+            <br>
         </tr>
     {% else %}
         <tr>

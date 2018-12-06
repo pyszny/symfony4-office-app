@@ -21,6 +21,11 @@ class Status
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Absence", mappedBy="status")
+     */
+    private $absences;
+
     public function getId(): ?int
     {
         return $this->id;

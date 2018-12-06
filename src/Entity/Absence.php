@@ -44,15 +44,9 @@ class Absence
     private $updated_at;
 
     /**
-     * @ORM\Column(type="integer")
-     * @ORM\OneToOne(targetEntity="App\Entity\Status")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="absences")
      */
     private $status;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $type;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\AbsenceApprovers", mappedBy="approver")
@@ -68,6 +62,11 @@ class Absence
     {
         $this->absenceApprovers = new ArrayCollection();
         $this->absenceReplacements = new ArrayCollection();
+        $this->created_at = new \DateTime();
+
+        if($this->updated_at == null) {
+            $this->updated_at = new \DateTime();
+        }
     }
 
     public function getId(): ?int
@@ -75,12 +74,19 @@ class Absence
         return $this->id;
     }
 
-    public function getEmployee(): ?int
+    /**
+     * @return mixed
+     */
+    public function getEmployee()
     {
         return $this->employee;
     }
 
-    public function setEmployee(int $employee): self
+    /**
+     * @param mixed $employee
+     * @return Absence
+     */
+    public function setEmployee($employee)
     {
         $this->employee = $employee;
 
@@ -135,26 +141,14 @@ class Absence
         return $this;
     }
 
-    public function getStatus(): ?int
+    public function getStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): self
+    public function setStatus($status)
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getType(): ?int
-    {
-        return $this->type;
-    }
-
-    public function setType(int $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }

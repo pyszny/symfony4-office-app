@@ -33,6 +33,15 @@ class AbsenceController extends AbstractController
     {
         $absence = new Absence();
         $form = $this->createForm(AbsenceType::class, $absence);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($absence);
+            $em->flush();
+
+            return $this->redirectToRoute('absences');
+        }
 
         return $this->render('absence/new.html.twig', [
             'absence' => $absence,
